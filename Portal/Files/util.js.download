@@ -1,0 +1,742 @@
+function set_green_filter_span2(x) { 
+	x.src = "/aportal/regadm/style/images/general/bulb_yellow.gif"; 
+}
+function set_yellow_filter_span2(x) { 
+	x.src = "/aportal/regadm/style/images/general/bulb_green.gif"; 
+}
+function set_gray_filter_span2(x) { 
+	x.src = "/aportal/regadm/style/images/general/bulb_gray.gif"; 
+}
+function select_all_checkboxes2(obj,bulb,all,status) {
+	for (var i = 0; i < obj.length; i++){
+		if (obj[i].getAttribute("data-disabled")){
+			//alert(obj[i].getAttribute("data-disabled"));
+		} else {
+			obj[i].checked = status;		
+		}
+	}
+	check_all_checkboxes2(obj,bulb,all);
+}
+function check_all_checkboxes2(obj,bulb,all) {
+	for (var i = 0; i < obj.length; i++)
+		if (obj[i].checked == true){
+			set_green_filter_span2(bulb); break;
+		}
+	if (i == obj.length){
+		if (all == 1) set_gray_filter_span2(bulb);
+		else set_yellow_filter_span2(bulb);
+	}
+}
+function clear_all_texts2(from,to,bulb) {
+	from.value = "";	
+	to.value = "";
+	check_all_texts2(from,to,bulb);
+}
+function check_all_texts2(from,to,bulb) {
+	if (from.value.length > 0 || to.value.length > 0)
+		set_green_filter_span2(bulb);
+	else
+		set_gray_filter_span2(bulb);
+}
+function clear_all_dates2(from,from_d,to,to_d,bulb) {
+	from.value = "";	
+	from_d.value = "";	
+	to.value = "";
+	to_d.value = "";
+	check_all_dates2(from,from_d,to,to_d,bulb);
+}
+function check_all_dates2(from,from_d,to,to_d,bulb) {
+	if (from.value.length > 0 || from_d.value.length > 0 || to.value.length || to_d.value.length > 0)
+		set_green_filter_span2(bulb);
+	else
+		set_gray_filter_span2(bulb);
+}
+function showCalendarForFilter(date_id) {
+	var sel_date = document.getElementById(date_id).value;
+	calWindow=window.open("/aportal/regadm/global/popup.calendar.jsp?date_id=" + date_id + "&check_func=check_all_dates2&sel_date=" + sel_date, "CalendarWindow", "width=370,height=210,scrollbar=yes,resizable=yes,menubar=no");
+}
+function showCalendar2(date_id,is_short) {
+	var sel_date = document.getElementById(date_id).value;
+	calWindow=window.open("/aportal/regadm/global/popup.calendar.jsp?date_id=" + date_id + "&sel_date=" + sel_date + "&is_short=" + is_short, "CalendarWindow", "width=370,height=210,scrollbar=yes,resizable=yes,menubar=no");
+}
+function showCalendar(date_id) {
+	var sel_date = document.getElementById(date_id).value;
+	calWindow=window.open("/aportal/regadm/global/popup.calendar.jsp?date_id=" + date_id + "&sel_date=" + sel_date, "CalendarWindow", "width=370,height=210,scrollbar=yes,resizable=yes,menubar=no");
+}
+function showFaculties(faculty_id) {
+	calWindow=window.open("/aportal/regadm/global/popup.faculties.jsp?faculty_id=" + faculty_id + "&fc_first=1", "FacultiesWindow", "width=460,height=390,scrollbar=yes,resizable=yes,menubar=no");
+}
+function showPositions(position_id) {
+	calWindow=window.open("/aportal/regadm/global/popup.positions.jsp?position_id=" + position_id + "&ps_first=1", "PositionsWindow", "width=460,height=390,scrollbar=yes,resizable=yes,menubar=no");
+}
+function showSemCourses(course_id,cs_semester) {
+	calWindow=window.open("/aportal/regadm/global/popup.sem.courses.jsp?course_id=" + course_id + "&cs_semester=" + cs_semester + "&cs_first=1", "SemCoursesWindow", "width=900,height=600,scrollbar=yes,resizable=yes,menubar=no");
+}
+function showCourses(course_id,cs_asguest) {
+	calWindow=window.open("/aportal/regadm/global/popup.courses.jsp?course_id=" + course_id + "&cs_first=1&cs_asguest="+cs_asguest, "CoursesWindow", "width=650,height=500,scrollbar=yes,resizable=yes,menubar=no");
+}
+function showClasses(class_id,dept_ids) {
+	calWindow=window.open("/aportal/regadm/global/popup.classes.jsp?class_id=" + class_id + "&dept_ids=" + dept_ids+ "&cl_first=1", "CoursesWindow", "width=460,height=390,scrollbar=yes,resizable=yes,menubar=no");
+}
+function showEPayment(epurl) {
+	calWindow=window.open(epurl, "EPaymentWindow");
+}
+
+function edit_student_left_pane(st_no,st_info,st_sub_info){
+	var st_url = '/aportal/regadm/students/students.jsp?action=edit&st_no={st_no}&st_info={st_info}&st_sub_info={st_sub_info}';
+	st_url = st_url.replace(/{st_no}/gi,st_no);
+	st_url = st_url.replace(/{st_info}/gi,st_info);
+	st_url = st_url.replace(/{st_sub_info}/gi,st_sub_info);		
+	parent.edit_student.location=st_url;	
+}
+function edit_student_main_list(st_no,st_info,st_sub_info){
+	var st_url = '/aportal/regadm/students/students.jsp?action=edit_dual&st_no={st_no}&st_info={st_info}&st_sub_info={st_sub_info}';
+	st_url = st_url.replace(/{st_no}/gi,st_no);
+	st_url = st_url.replace(/{st_info}/gi,st_info);
+	st_url = st_url.replace(/{st_sub_info}/gi,st_sub_info);		
+	document.location=st_url;	
+}
+function edit_student_dual_pane(st_no,st_info,st_sub_info){
+	var st_url = '/aportal/regadm/students/students.jsp?action=edit_dual&st_no={st_no}&st_info={st_info}&st_sub_info={st_sub_info}';
+	st_url = st_url.replace(/{st_no}/gi,st_no);
+	st_url = st_url.replace(/{st_info}/gi,st_info);
+	st_url = st_url.replace(/{st_sub_info}/gi,st_sub_info);		
+	parent.location=st_url;	
+}
+
+function edit_course_left_pane(cs_id,cs_info,cs_sub_info){
+	var cs_url = '/aportal/regadm/courses/courses.jsp?action=edit&cs_id={cs_id}&cs_info={cs_info}&cs_sub_info={cs_sub_info}';
+	cs_url = cs_url.replace(/{cs_id}/gi,cs_id);
+	cs_url = cs_url.replace(/{cs_info}/gi,cs_info);
+	cs_url = cs_url.replace(/{cs_sub_info}/gi,cs_sub_info);		
+	parent.edit_course.location=cs_url;	
+}
+function edit_course_main_list(cs_id,cs_info,cs_sub_info){
+	var cs_url = '/aportal/regadm/courses/courses.jsp?action=edit_dual&cs_id={cs_id}&cs_info={cs_info}&cs_sub_info={cs_sub_info}';
+	cs_url = cs_url.replace(/{cs_id}/gi,cs_id);
+	cs_url = cs_url.replace(/{cs_info}/gi,cs_info);
+	cs_url = cs_url.replace(/{cs_sub_info}/gi,cs_sub_info);		
+	document.location=cs_url;	
+}
+function edit_course_dual_pane(cs_id,cs_info,cs_sub_info){
+	var cs_url = '/aportal/regadm/courses/courses.jsp?action=edit_dual&cs_id={cs_id}&cs_info={cs_info}&cs_sub_info={cs_sub_info}';
+	cs_url = cs_url.replace(/{cs_id}/gi,cs_id);
+	cs_url = cs_url.replace(/{cs_info}/gi,cs_info);
+	cs_url = cs_url.replace(/{cs_sub_info}/gi,cs_sub_info);		
+	parent.location=cs_url;	
+}
+
+function edit_faculty_left_pane(fc_no,fc_info,fc_sub_info){
+	var fc_url = '/aportal/regadm/faculties/faculties.jsp?action=edit&fc_no={fc_no}&fc_info={fc_info}&fc_sub_info={fc_sub_info}';
+	fc_url = fc_url.replace(/{fc_no}/gi,fc_no);
+	fc_url = fc_url.replace(/{fc_info}/gi,fc_info);
+	fc_url = fc_url.replace(/{fc_sub_info}/gi,fc_sub_info);		
+	if (parent.edit_faculty != 'undeinfed')
+		parent.edit_faculty.location=fc_url;
+	else
+		parent.main.location=fc_url;
+}
+function edit_faculty_main_list(fc_no,fc_info,fc_sub_info){
+	var fc_url = '/aportal/regadm/faculties/faculties.jsp?action=edit_dual&fc_no={fc_no}&fc_info={fc_info}&fc_sub_info={fc_sub_info}';
+	fc_url = fc_url.replace(/{fc_no}/gi,fc_no);
+	fc_url = fc_url.replace(/{fc_info}/gi,fc_info);
+	fc_url = fc_url.replace(/{fc_sub_info}/gi,fc_sub_info);		
+	document.location=fc_url;	
+}
+function edit_faculty_dual_pane(fc_no,fc_info,fc_sub_info){
+	var fc_url = '/aportal/regadm/faculties/faculties.jsp?action=edit_dual&fc_no={fc_no}&fc_info={fc_info}&fc_sub_info={fc_sub_info}';
+	fc_url = fc_url.replace(/{fc_no}/gi,fc_no);
+	fc_url = fc_url.replace(/{fc_info}/gi,fc_info);
+	fc_url = fc_url.replace(/{fc_sub_info}/gi,fc_sub_info);		
+	parent.location=fc_url;	
+}
+
+function edit_class_left_pane(cl_id,cl_info,cl_sub_info){
+	var cl_url = '/aportal/regadm/classes/classes.jsp?action=edit&cl_id={cl_id}&cl_info={cl_info}&cl_sub_info={cl_sub_info}';
+	cl_url = cl_url.replace(/{cl_id}/gi,cl_id);
+	cl_url = cl_url.replace(/{cl_info}/gi,cl_info);
+	cl_url = cl_url.replace(/{cl_sub_info}/gi,cl_sub_info);		
+	parent.edit_class.location=cl_url;	
+}
+function edit_class_main_list(cl_id,cl_info,cl_sub_info){
+	var cl_url = '/aportal/regadm/classes/classes.jsp?action=edit_dual&cl_id={cl_id}&cl_info={cl_info}&cl_sub_info={cl_sub_info}';
+	cl_url = cl_url.replace(/{cl_id}/gi,cl_id);
+	cl_url = cl_url.replace(/{cl_info}/gi,cl_info);
+	cl_url = cl_url.replace(/{cl_sub_info}/gi,cl_sub_info);		
+	document.location=cl_url;	
+}
+function edit_class_dual_pane(cl_id,cl_info,cl_sub_info){
+	var cl_url = '/aportal/regadm/classes/classes.jsp?action=edit_dual&cl_id={cl_id}&cl_info={cl_info}&cl_sub_info={cl_sub_info}';
+	cl_url = cl_url.replace(/{cl_id}/gi,cl_id);
+	cl_url = cl_url.replace(/{cl_info}/gi,cl_info);
+	cl_url = cl_url.replace(/{cl_sub_info}/gi,cl_sub_info);		
+	parent.location=cl_url;	
+}
+function expand(objId){
+	if (document.getElementById(objId).style.display == "none")
+		document.getElementById(objId).style.display = "";
+	else
+		document.getElementById(objId).style.display = "none";
+}	
+
+function edit_faculty_portal_left_pane(fc_info,fc_sub_info){
+	var fc_url = '/aportal/regadm/faculty.portal/faculty.portal.jsp?action=edit&fc_info={fc_info}&fc_sub_info={fc_sub_info}';
+	fc_url = fc_url.replace(/{fc_info}/gi,fc_info);
+	fc_url = fc_url.replace(/{fc_sub_info}/gi,fc_sub_info);		
+	parent.edit_faculty_portal.location=fc_url;	
+}
+function edit_faculty_portal_main_list(fc_info,fc_sub_info){
+	var fc_url = '/aportal/regadm/faculty.portal/faculty.portal.jsp?action=edit_dual&fc_info={fc_info}&fc_sub_info={fc_sub_info}';
+	fc_url = fc_url.replace(/{fc_info}/gi,fc_info);
+	fc_url = fc_url.replace(/{fc_sub_info}/gi,fc_sub_info);		
+	document.location=fc_url;	
+}
+function edit_faculty_portal_dual_pane(fc_info,fc_sub_info){
+	var fc_url = '/aportal/regadm/faculty.portal/faculty.portal.jsp?action=edit_dual&fc_info={fc_info}&fc_sub_info={fc_sub_info}';
+	fc_url = fc_url.replace(/{fc_info}/gi,fc_info);
+	fc_url = fc_url.replace(/{fc_sub_info}/gi,fc_sub_info);		
+	parent.location=fc_url;	
+}
+function edit_faculty_portal_single_pane(fc_info,fc_sub_info){
+	var fc_url = '/aportal/regadm/faculty.portal/faculty.portal.jsp?action=edit&fc_info={fc_info}&fc_sub_info={fc_sub_info}';
+	fc_url = fc_url.replace(/{fc_info}/gi,fc_info);
+	fc_url = fc_url.replace(/{fc_sub_info}/gi,fc_sub_info);		
+	document.location=fc_url;	
+}
+
+function edit_student_portal_left_pane(st_info,st_sub_info){
+	var st_url = '/aportal/regadm/student.portal/student.portal.jsp?action=edit&st_info={st_info}&st_sub_info={st_sub_info}';
+	st_url = st_url.replace(/{st_info}/gi,st_info);
+	st_url = st_url.replace(/{st_sub_info}/gi,st_sub_info);		
+	parent.edit_student_portal.location=st_url;	
+}
+function edit_student_portal_main_list(st_info,st_sub_info){
+	var st_url = '/aportal/regadm/student.portal/student.portal.jsp?action=edit_dual&st_info={st_info}&st_sub_info={st_sub_info}';
+	st_url = st_url.replace(/{st_info}/gi,st_info);
+	st_url = st_url.replace(/{st_sub_info}/gi,st_sub_info);		
+	document.location=st_url;	
+}
+function edit_student_portal_dual_pane(st_info,st_sub_info){
+	var st_url = '/aportal/regadm/student.portal/student.portal.jsp?action=edit_dual&st_info={st_info}&st_sub_info={st_sub_info}';
+	st_url = st_url.replace(/{st_info}/gi,st_info);
+	st_url = st_url.replace(/{st_sub_info}/gi,st_sub_info);		
+	parent.location=st_url;	
+}
+function edit_student_portal_single_pane(st_info,st_sub_info){
+	var st_url = '/aportal/regadm/student.portal/student.portal.jsp?action=edit&st_info={st_info}&st_sub_info={st_sub_info}';
+	st_url = st_url.replace(/{st_info}/gi,st_info);
+	st_url = st_url.replace(/{st_sub_info}/gi,st_sub_info);		
+	document.location=st_url;	
+}
+
+function edit_research_left_pane(fc_no,fc_info,fc_sub_info){
+	var fc_url = '/aportal/regadm/faculties/faculties.jsp?action=edit&fc_no={fc_no}&fc_info={fc_info}&fc_sub_info={fc_sub_info}';
+	fc_url = fc_url.replace(/{fc_no}/gi,fc_no);
+	fc_url = fc_url.replace(/{fc_info}/gi,fc_info);
+	fc_url = fc_url.replace(/{fc_sub_info}/gi,fc_sub_info);		
+	parent.main.location=fc_url;	
+}
+
+function edit_research_new_left_pane(rs_id,rs_info,rs_sub_info){
+	var rs_url = '/aportal/regadm/research/research.jsp?action=edit&rs_id={rs_id}&rs_info={rs_info}&rs_sub_info={rs_sub_info}';
+	rs_url = rs_url.replace(/{rs_id}/gi,rs_id);
+	rs_url = rs_url.replace(/{rs_info}/gi,rs_info);
+	rs_url = rs_url.replace(/{rs_sub_info}/gi,rs_sub_info);		
+	parent.main.location=rs_url;	
+}
+
+function getIntValue(id){
+	var val = document.getElementById(id).value;
+	if (!val || val.length == 0) 
+		val = 0;
+	return val
+}
+
+function processAD(id) {
+
+	if (id)
+		expandRow(id);
+
+	var initamount = getIntValue('rs_intinitamount');
+
+	var amounts = new Array();
+	for (var e=1; e<=8; e++){
+		amounts[e-1] = (document.getElementById('rs_intedition'+e).checked) ? document.getElementById('rs_intedition'+e+'amount').value : 0;
+		if (!amounts[e-1] || amounts[e-1].length == 0) 
+			amounts[e-1] = 0;
+	}
+	
+	var amount = Number(initamount);
+	for (var e=1; e<=8; e++){
+		amount += Number(amounts[e-1]);
+	}
+	document.getElementById('rs_intamount').value = amount;
+
+	var initduration = getIntValue('rs_intinitduration');
+
+	var durations = new Array();
+	for (var e=1; e<=8; e++){
+		durations[e-1] = (document.getElementById('rs_intedition'+e).checked) ? document.getElementById('rs_intedition'+e+'duration').value : 0;
+		if (!durations[e-1] || durations[e-1].length == 0) 
+			durations[e-1] = 0;
+	}
+	
+	var duration = Number(initduration);
+	for (var e=1; e<=8; e++){
+		duration += Number(durations[e-1]);
+	}
+	document.getElementById('rs_intduration').value = duration;		
+	
+	processCheque();		
+}
+
+function parseISO8601(dateStringInRange) {
+	var isoExp = /^\s*(\d{4})-(\d\d)-(\d\d)\s*$/,
+		date = new Date(NaN), month,
+		parts = isoExp.exec(dateStringInRange);
+
+	if(parts) {
+	  month = +parts[2];
+	  date.setFullYear(parts[1], month - 1, parts[3]);
+	  if(month != date.getMonth() + 1) {
+		date.setTime(NaN);
+	  }
+	}
+	return date;
+}
+
+function processShare() {
+
+	var creatorcode = document.getElementById('rs_intcreatorcode').value;
+	
+	var place1share =(document.getElementById('rs_intplace1').checked) ? document.getElementById('rs_intplace1share').value : 0;
+	if (!place1share || place1share.length == 0) 
+		place1share = 0;
+		
+	var place1id = document.getElementById('rs_intplace1id').value;
+	var place1type = 1; // Pazhooheshgah
+	if ((place1id >= 1005 && place1id <= 1022) || (place1id >= 1125 && place1id <= 1127))
+		place1type = 2; // Daneshgah
+	else if (place1id == 1129)
+		place1type = 3; // Univ
+		
+	var place2share =(document.getElementById('rs_intplace2').checked) ? document.getElementById('rs_intplace2share').value : 0;
+	if (!place2share || place2share.length == 0) 
+		place2share = 0;
+
+	var place2id = document.getElementById('rs_intplace2id').value;
+	var place2type = 1; // Pazhooheshgah
+	if ((place2id >= 1005 && place2id <= 1022) || (place2id >= 1125 && place2id <= 1127))
+		place2type = 2; // Daneshgah
+	else if (place2id == 1129)
+		place2type = 3; // Univ
+	if (place2share == 0)
+		place2type = 0; // Nothing		
+	
+	var oldcontractdate = new Date("2013-06-20");
+	if (oldcontractdate == "NaN")
+		oldcontractdate = parseISO8601("2013-06-20");
+
+	var startdate = new Date();
+	var startdate_s = document.getElementById('rs_intstartdate').value;
+	if (startdate_s && startdate_s.length > 0){
+		startdate = new Date(startdate_s);
+		if (startdate == "NaN")
+			startdate = parseISO8601(startdate_s);
+	}		
+		
+	var isnew = 1;	
+	if (startdate < oldcontractdate)	
+		isnew = 0;
+	
+	//owner
+	var owneroverhead = 0;
+	var ownerunivshare = 0;
+	var ownerplace1share = 0;
+	var ownerplace2share = 0; 
+	var ownerexecshare = 0;
+	var ownersupvshare = 0;
+	var ownercreatorshare = 0;
+	var ownertempshare = 0;
+	
+	var owneroverheadcode = document.getElementById('rs_intowneroverheadcode').value;
+	if (owneroverheadcode == 7601){
+		if (isnew == 1){
+			owneroverhead = 20;
+			ownerunivshare = 12.5;
+			ownerexecshare = 80;
+			if (creatorcode == 7802){
+				if (place1type == 1 || place2type == 1){
+					ownercreatorshare = 2.5;
+				}
+			}
+			else if (creatorcode == 7803){
+				if (place1type != 1 || place2type != 0){
+					ownercreatorshare = 2.5;
+				}
+			}
+			else if (creatorcode == 7804){
+				ownerunivshare = 15;
+				if (place1type == 1){
+					owneroverhead = 17.5;
+					ownerexecshare = 82.5;
+					ownertempshare = 0;
+				}
+			}			
+		}
+		else{
+			ownersupvshare = getIntValue('rs_intownersupvshare');
+			
+			owneroverhead = 15;
+			ownerunivshare = 10;
+			ownerexecshare = (100 - ownersupvshare - owneroverhead > 0) ? (100 - ownersupvshare - owneroverhead) : 0;
+		}
+	}
+	else if (owneroverheadcode == 7602){
+		if (isnew == 1){
+			owneroverhead = 30;
+			if (creatorcode == 7802){
+				ownerunivshare = 25;
+				if (place1type == 1){
+					owneroverhead = 27.5;
+					ownerunivshare = 20;
+					ownercreatorshare = 2.5;
+				}
+			}
+			else if (creatorcode == 7803){
+				ownerunivshare = 20;
+				if (place1type == 2 && place2type == 0){
+					ownercreatorshare = 5;
+				}
+				if (place1type == 1){
+					owneroverhead = 27.5;
+				}
+			}
+			else if (creatorcode == 7804){
+				owneroverhead = 25;
+				ownerunivshare = 20;
+				if (place1type == 1){
+					owneroverhead = 22.5;
+				}
+			}			
+			ownerexecshare = 100 - owneroverhead;
+		}
+		else{
+			ownersupvshare = getIntValue('rs_intownersupvshare');
+			
+			owneroverhead = 25;
+			ownerunivshare = 20;
+			ownerexecshare = (100 - ownersupvshare - owneroverhead > 0) ? (100 - ownersupvshare - owneroverhead) : 0;
+		}
+	}
+	else if (owneroverheadcode == 7603){ // amoozeshi
+		ownersupvshare = getIntValue('rs_intownersupvshare');
+
+		owneroverhead = 40;
+		ownerunivshare = 35;
+		ownerexecshare = (100 - ownersupvshare - owneroverhead > 0) ? (100 - ownersupvshare - owneroverhead) : 0;
+	}
+	else if (owneroverheadcode == 7604 || owneroverheadcode == 7600){ //no balasari
+		ownersupvshare = getIntValue('rs_intownersupvshare');
+		ownerexecshare = (100 - ownersupvshare - owneroverhead > 0) ? (100 - ownersupvshare - owneroverhead) : 0;
+	}
+	else if (owneroverheadcode == 7605){ //modiriati
+		owneroverhead = getIntValue('rs_intowneroverhead');
+		ownerunivshare = getIntValue('rs_intownerunivshare');
+		ownersupvshare = getIntValue('rs_intownersupvshare');
+		
+		ownercreatorshare = getIntValue('rs_intownercreatorshare');
+		ownerexecshare = getIntValue('rs_intownerexecshare');
+		ownerplace1share = getIntValue('rs_intownerplace1share');
+		ownerplace2share = getIntValue('rs_intownerplace2share');
+		ownerexecshare = 100 - ownerunivshare - ownerplace1share - ownerplace2share - ownercreatorshare - ownersupvshare;
+		if (Number(ownerexecshare) > 100)
+			ownerexecshare = 100;
+		else if (Number(ownerexecshare) < 0)
+			ownerexecshare = 0;
+	}
+	
+	if (owneroverheadcode != 7605){
+		ownerplace1share = (owneroverhead - ownerunivshare - ownercreatorshare - ownertempshare) * (place1share/100.0);
+		ownerplace2share = (owneroverhead - ownerunivshare - ownercreatorshare - ownertempshare) * (place2share/100.0);
+	}
+	
+	document.getElementById('rs_intowneroverhead').value = owneroverhead;
+	document.getElementById('rs_intownerunivshare').value = ownerunivshare;
+	document.getElementById('rs_intownerplace1share').value = ownerplace1share;
+	document.getElementById('rs_intownerplace2share').value = ownerplace2share;
+	document.getElementById('rs_intownerexecshare').value = ownerexecshare;
+	document.getElementById('rs_intownersupvshare').value = ownersupvshare;
+	document.getElementById('rs_intownercreatorshare').value = ownercreatorshare;
+	
+	var bbbb = (owneroverheadcode == 7605) ? false : true;
+	document.getElementById('rs_intowneroverhead').readOnly = bbbb;
+	document.getElementById('rs_intownerunivshare').readOnly = bbbb;		
+	document.getElementById('rs_intownercreatorshare').readOnly = bbbb;
+	document.getElementById('rs_intownerplace1share').readOnly = bbbb;
+	document.getElementById('rs_intownerplace2share').readOnly = bbbb;
+	document.getElementById('rs_intownerexecshare').readOnly = bbbb;
+	
+	// sponsor
+	var sponsoroverhead = 0;
+	var sponsorunivshare = 0;
+	var sponsorplace1share = 0;
+	var sponsorplace2share = 0; 
+	var sponsorexecshare = 0;
+	var sponsorsupvshare = 0;
+	var sponsorcreatorshare = 0;
+	var sponsortempshare = 0;
+	
+	var sponsoroverheadcode = document.getElementById('rs_intsponsoroverheadcode').value;
+	if (sponsoroverheadcode == 7601){
+		if (isnew == 1){
+			sponsoroverhead = 20;
+			sponsorunivshare = 12.5;
+			sponsorexecshare = 80;
+			if (creatorcode == 7802){
+				if (place1type == 1 || place2type == 1){
+					sponsorcreatorshare = 2.5;
+				}
+			}
+			else if (creatorcode == 7803){
+				if (place1type != 1 || place2type != 0){
+					sponsorcreatorshare = 2.5;
+				}
+			}
+			else if (creatorcode == 7804){
+				sponsorunivshare = 15;
+				if (place1type == 1){
+					sponsorexecshare = 82.5;
+					sponsortempshare = 2.5;
+				}
+			}			
+		}
+		else{
+			sponsorsupvshare = getIntValue('rs_intsponsorsupvshare');
+			
+			sponsoroverhead = 15;
+			sponsorunivshare = 10;
+			sponsorexecshare = (100 - sponsorsupvshare - sponsoroverhead > 0) ? (100 - sponsorsupvshare - sponsoroverhead) : 0;
+		}
+	}
+	else if (sponsoroverheadcode == 7602){
+		if (isnew == 1){
+			sponsoroverhead = 30;
+			if (creatorcode == 7802){
+				sponsorunivshare = 25;
+				if (place1type == 1){
+					sponsoroverhead = 27.5;
+					sponsorunivshare = 20;
+					sponsorcreatorshare = 2.5;
+				}
+			}
+			else if (creatorcode == 7803){
+				sponsorunivshare = 20;
+				if (place1type == 2 && place2type == 0){
+					sponsorcreatorshare = 5;
+				}
+				if (place1type == 1){
+					sponsoroverhead = 27.5;
+				}
+			}
+			else if (creatorcode == 7804){
+				sponsoroverhead = 25;
+				sponsorunivshare = 20;
+				if (place1type == 1){
+					sponsoroverhead = 22.5;
+				}
+			}			
+			sponsorexecshare = 100 - sponsoroverhead;
+		}
+		else{
+			sponsorsupvshare = getIntValue('rs_intsponsorsupvshare');
+			
+			sponsoroverhead = 25;
+			sponsorunivshare = 20;
+			sponsorexecshare = (100 - sponsorsupvshare - sponsoroverhead > 0) ? (100 - sponsorsupvshare - sponsoroverhead) : 0;
+		}
+	}
+	else if (sponsoroverheadcode == 7603){ // amoozeshi
+		sponsorsupvshare = getIntValue('rs_intsponsorsupvshare');
+
+		sponsoroverhead = 40;
+		sponsorunivshare = 35;
+		sponsorexecshare = (100 - sponsorsupvshare - sponsoroverhead > 0) ? (100 - sponsorsupvshare - sponsoroverhead) : 0;
+	}
+	else if (sponsoroverheadcode == 7604 || sponsoroverheadcode == 7600){ //no balasari
+		sponsorsupvshare = getIntValue('rs_intsponsorsupvshare');
+		sponsorexecshare = (100 - sponsorsupvshare - sponsoroverhead > 0) ? (100 - sponsorsupvshare - sponsoroverhead) : 0;
+	}
+	else if (sponsoroverheadcode == 7605){ //modiriati
+		sponsoroverhead = getIntValue('rs_intsponsoroverhead');
+		sponsorunivshare = getIntValue('rs_intsponsorunivshare');
+		sponsorsupvshare = getIntValue('rs_intsponsorsupvshare');
+		
+		sponsorcreatorshare = getIntValue('rs_intsponsorcreatorshare');
+		sponsorexecshare = getIntValue('rs_intsponsorexecshare');
+		sponsorplace1share = getIntValue('rs_intsponsorplace1share');
+		sponsorplace2share = getIntValue('rs_intsponsorplace2share');
+		sponsorexecshare = 100 - sponsorunivshare - sponsorplace1share - sponsorplace2share - sponsorcreatorshare - sponsorsupvshare;
+		if (Number(sponsorexecshare) > 100)
+			sponsorexecshare = 100;
+		else if (Number(sponsorexecshare) < 0)
+			sponsorexecshare = 0;
+	}
+	
+	if (sponsoroverheadcode == 7605){
+		sponsorplace1share = (sponsoroverhead - sponsorunivshare - sponsorcreatorshare - sponsortempshare) * (place1share/100.0);
+		sponsorplace2share = (sponsoroverhead - sponsorunivshare - sponsorcreatorshare - sponsortempshare) * (place2share/100.0);
+	}
+	
+	document.getElementById('rs_intsponsoroverhead').value = sponsoroverhead;
+	document.getElementById('rs_intsponsorunivshare').value = sponsorunivshare;
+	document.getElementById('rs_intsponsorplace1share').value = sponsorplace1share;
+	document.getElementById('rs_intsponsorplace2share').value = sponsorplace2share;
+	document.getElementById('rs_intsponsorexecshare').value = sponsorexecshare;
+	document.getElementById('rs_intsponsorsupvshare').value = sponsorsupvshare;
+	document.getElementById('rs_intsponsorcreatorshare').value = sponsorcreatorshare;
+
+	var aaaa = (sponsoroverheadcode == 7605) ? false : true;
+	document.getElementById('rs_intsponsoroverhead').readOnly = aaaa;
+	document.getElementById('rs_intsponsorunivshare').readOnly = aaaa;		
+	document.getElementById('rs_intsponsorcreatorshare').readOnly = aaaa;
+	document.getElementById('rs_intsponsorplace1share').readOnly = aaaa;
+	document.getElementById('rs_intsponsorplace2share').readOnly = aaaa;
+	document.getElementById('rs_intsponsorexecshare').readOnly = aaaa;
+	
+	processCheque();
+}
+
+function validate(status) {
+
+	// check #1
+	var place1share =(document.getElementById('rs_intplace1').checked) ? document.getElementById('rs_intplace1share').value : 0;
+	if (!place1share || place1share.length == 0) 
+		place1share = 0;
+
+	var place2share =(document.getElementById('rs_intplace2').checked) ? document.getElementById('rs_intplace2share').value : 0;
+	if (!place2share || place2share.length == 0) 
+		place2share = 0;
+
+	if (Number(place1share) + Number(place2share) != 100){
+		alert('ÏÑÕÏåÇí ãÍá ÇÌÑÇ ÕÍíÍ äíÓÊäÏ!')
+		return false;
+	}
+
+	// check #2
+	var amount = getIntValue('rs_intamount');
+	var ownershare = getIntValue('rs_intownershare');
+	var sponsorshare = getIntValue('rs_intsponsorshare');
+	if (Number(ownershare) + Number(sponsorshare) != Number(amount)){
+		alert('ãÌãæÚ ÇÚÊÈÇÑ ˜ÇÑÝÑãÇ æ ÇÚÊÈÇÑ ÍÇãí ãÚÇÏá ãÈáÛ ˜á äãíÈÇÔÏ!')
+		return false;
+	}
+
+	// check #3
+	var ownerunivshare = getIntValue('rs_intownerunivshare');
+	var ownerplace1share = getIntValue('rs_intownerplace1share');
+	var ownerplace2share = getIntValue('rs_intownerplace2share');
+	var ownerexecshare = getIntValue('rs_intownerexecshare');
+	var ownersupvshare = getIntValue('rs_intownersupvshare');
+	if (Number(ownerunivshare) + Number(ownerplace1share) + Number(ownerplace2share) + Number(ownerexecshare) + Number(ownersupvshare)!= 100){
+		//alert('ÏÑÕÏåÇí ÊÎÕíÕ ÇÚÊÈÇÑ ˜ÇÑÝÑãÇ ÕÍíÍ äíÓÊäÏ!')
+		//return false;
+	}
+		
+	// check #4
+	var sponsorunivshare = getIntValue('rs_intsponsorunivshare');
+	var sponsorplace1share = getIntValue('rs_intsponsorplace1share');
+	var sponsorplace2share = getIntValue('rs_intsponsorplace2share');
+	var sponsorexecshare = getIntValue('rs_intsponsorexecshare');
+	var sponsorsupvshare = getIntValue('rs_intsponsorsupvshare');
+	if (Number(sponsorunivshare) + Number(sponsorplace1share) + Number(sponsorplace2share) + Number(sponsorexecshare) + Number(sponsorsupvshare)!= 100){
+		//alert('ÏÑÕÏåÇí ÊÎÕíÕ ÇÚÊÈÇÑ ÍÇãí ÕÍíÍ äíÓÊäÏ!')
+		//return false;
+	}
+
+	// check #5
+	var statusValue = '7700';
+	try {
+		var statusIndex = document.getElementById('rs_intstatuscode').selectedIndex;
+		statusValue = document.getElementById('rs_intstatuscode').options[statusIndex].value;
+	}catch(e){
+	}
+	var intprogress = getIntValue('rs_intprogress');
+	if (Number(intprogress) < 95 && Number(statusValue) == 7703){
+		return confirm('ÏÑÕÏ íÔÑÝÊ  ÑæŽå ˜ãÊÑ ÇÒ 95 ÏÑÕÏ ãíÈÇÔÏ. ÂíÇ ãÇíá Èå ÇÏÇãå åÓÊíÏ¿');
+	}
+	
+	return true;
+}		
+
+function processCheque(id){
+		
+	var amount = getIntValue('rs_intamount');
+		
+	var ownerunivshare = getIntValue('rs_intownerunivshare');
+	var ownerplace1share = getIntValue('rs_intownerplace1share');
+	var ownerplace2share = getIntValue('rs_intownerplace2share');
+	var ownerexecshare = getIntValue('rs_intownerexecshare');
+	var ownersupvshare = getIntValue('rs_intownersupvshare');
+	
+	var sponsorunivshare = getIntValue('rs_intsponsorunivshare');
+	var sponsorplace1share = getIntValue('rs_intsponsorplace1share');
+	var sponsorplace2share = getIntValue('rs_intsponsorplace2share');
+	var sponsorexecshare = getIntValue('rs_intsponsorexecshare');
+	var sponsorsupvshare = getIntValue('rs_intsponsorsupvshare');
+
+	var isprepaid = 1;
+	var payment = 0;
+	var totalpayment = 0;
+	var totalpayment_percent = 0;
+	var totalpayment_percent_prev = 0;
+	for (var p=1; p<=13; p++){
+		if (document.getElementById('rs_payment' + p).checked){
+			payment = getIntValue('rs_payment'+p+'_amount');
+						
+			//document.getElementById('rs_payment'+p+'_percent').value = (amount != 0) ? Math.floor((payment/amount) * 100) : 0;
+			totalpayment_percent_prev = totalpayment_percent;
+			totalpayment += Number(payment);
+			totalpayment_percent = (amount != 0) ? Math.floor((totalpayment/amount) * 100) : 0;
+			
+			document.getElementById('rs_payment'+p+'_percent').value = totalpayment_percent - totalpayment_percent_prev;
+			document.getElementById('rs_payment'+p+'_totalpercent').value = totalpayment_percent;
+			
+			document.getElementById('rs_payment'+p+'_totalamount').value = (amount != 0) ? totalpayment : 0;
+			if (p <=3){
+				isprepaid = 1;
+				document.getElementById('rs_payment'+p+'_progress').value = 0;
+			}
+			else{
+				isprepaid = 0;
+				document.getElementById('rs_payment'+p+'_progress').value = (amount != 0) ? Math.floor((totalpayment/amount) * 100) : 0;
+			}
+
+			var asset = getIntValue('rs_payment'+p+'_asset');
+			
+			var chequetypecode = document.getElementById('rs_payment'+p+'_typecode').value;
+			if (chequetypecode == 7901){
+			
+				document.getElementById('rs_payment'+p+'_univ').value = Math.floor((ownerunivshare * (payment - asset)) / 100);
+				document.getElementById('rs_payment'+p+'_place1').value = Math.floor((ownerplace1share * (payment - asset)) / 100);
+				document.getElementById('rs_payment'+p+'_place2').value = Math.floor((ownerplace2share * (payment - asset)) / 100);
+				document.getElementById('rs_payment'+p+'_exec').value = Math.floor((ownerexecshare * (payment - asset)) / 100);
+				document.getElementById('rs_payment'+p+'_supv').value = Math.floor((ownersupvshare * (payment - asset)) / 100);
+				
+			}
+			else if (chequetypecode == 7902){
+			
+				document.getElementById('rs_payment'+p+'_univ').value = Math.floor((sponsorunivshare * (payment - asset)) / 100);
+				document.getElementById('rs_payment'+p+'_place1').value = Math.floor((sponsorplace1share * (payment - asset)) / 100);
+				document.getElementById('rs_payment'+p+'_place2').value = Math.floor((sponsorplace2share * (payment - asset)) / 100);
+				document.getElementById('rs_payment'+p+'_exec').value = Math.floor((sponsorexecshare * (payment - asset)) / 100);
+				document.getElementById('rs_payment'+p+'_supv').value = Math.floor((sponsorsupvshare * (payment - asset)) / 100);
+			}
+
+		}
+	}
+	document.getElementById('rs_intpayment').value = totalpayment;
+	document.getElementById('rs_intprogress').value = (amount != 0 && isprepaid == 0) ? Math.floor((totalpayment/amount) * 100) : 0;
+}
+
+
